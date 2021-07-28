@@ -11,4 +11,5 @@ export type ActionMap<M extends { [index: string]: any }> = {
 
 export enum Types {
   generateUserInputGrid = "generate_user_input_grid",
+  clearAll = "clear_all",
 }

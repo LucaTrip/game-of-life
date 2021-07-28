@@ -1,3 +1,6 @@
+/**
+ * This is the global Context that permit me to share the data to the children
+ */
 import React, { createContext, Dispatch, useReducer } from 'react';
 import { ActionMap, Types } from '../utils/reducers';
 
@@ -15,6 +18,7 @@ type GomPayload = {
     colsNumb: number,
     newPopulationState: number[][]
   };
+  [Types.clearAll]: {}
 };
 
 const initialState = {
@@ -37,6 +41,8 @@ const gomReducer = (state: InitialStateType, action: GomActions) => {
       let currentGeneration = action.payload!.currentGeneration;
 
       return { ...state, numbCols, numbRows, userGridSize, currentGeneration };
+    case Types.clearAll:
+      return { ...initialState };
     default:
       return state;
   }
