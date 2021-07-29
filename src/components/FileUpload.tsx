@@ -65,6 +65,10 @@ const readFile = (fileToRead: File, dispatch: Function, e: any) => {
 }
 
 const FileUpload = () => {
+  /**
+   * I used the useref hook which allows us to access the value of a specific DOM element.
+   * By doing so, I can hide the input and only show a button that calls this reference.
+   */
   const inputFile = useRef<HTMLInputElement>(null);
 
   const { state, dispatch } = useContext(GomContext);
