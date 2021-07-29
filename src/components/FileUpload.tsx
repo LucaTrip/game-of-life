@@ -7,8 +7,9 @@ import { Types } from '../utils/reducers';
  * This function read the file selected by the user, process it and then dispatch the data 
  * to the global context
  */
-const readFile = (fileToRead: File, dispatch: Function) => {
+const readFile = (fileToRead: File, dispatch: Function, e: any) => {
   const reader = new FileReader();
+  const _tempE = e;
 
   reader.onload = (e) => {
     let fileResult = '';
@@ -48,6 +49,7 @@ const readFile = (fileToRead: File, dispatch: Function) => {
         }
       }
 
+      _tempE.target.value = null; // this is necessary to clean up the target value and clear the state to add and process new file
       dispatch({ type: Types.generateUserInputGrid, payload: { currentGeneration, rowsNumb, colsNumb, newPopulationState } });
     } else {
       alert("The uploaded file is empty");
@@ -64,6 +66,7 @@ const readFile = (fileToRead: File, dispatch: Function) => {
 
 const FileUpload = () => {
   const inputFile = useRef<HTMLInputElement>(null);
+
   const { state, dispatch } = useContext(GomContext);
 
   /**
@@ -80,7 +83,7 @@ const FileUpload = () => {
       const fileType = parts[parts.length - 1];
 
       if (fileType === 'txt') {
-        readFile(files[0], dispatch);
+        readFile(files[0], dispatch, e);
       } else {
         alert("The file type must be '.txt'");
       }

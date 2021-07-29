@@ -1,3 +1,4 @@
-export interface FileUploadProp {
-  onReadFileComplete: Function;
+export interface GridOutputProp {
+  userGrid: number[][],
+  numbCols: number
 };
