@@ -1,3 +1,6 @@
+/**
+ * this component is only responsible for displaying an input matrix
+ */
 import React from 'react';
 
 import { GridOutputProp } from '../models/models';

@@ -40,22 +40,21 @@ const Grid = () => {
         for (let k = 0; k < state.numbCols; k++) {
           let neighbors = 0;
 
-          /**
-           * When calculating the next generation you should follow these rules:
-           *   - Any live cell with fewer than two live neighbours dies.
-           *   - Any live cell with two or three live neighbours lives on to the next generation.
-           *   - Any live cell with more than three live neighbours dies.
-           *   - Any dead cell with exactly three live neighbours becomes a live cell.
-           */
-
+          // find out how many living neighbours a given cell has
           operations.forEach(([x, y]) => {
             const newI = i + x;
             const newK = k + y;
+
             if (newI >= 0 && newI < state.numbRows && newK >= 0 && newK < state.numbCols) {
               neighbors += state.userGridSize![newI][newK];
             }
           });
 
+          /**
+           * Once we have found how many living neighbours a cell has, we move on to assign a new status: 
+           *   - if a cell has less than 2 or more than 3 living neighbours then its status will become 0, i.e. dead
+           *   - If a cell is dead and has 3 living neighbours then its status will become 1, i.e. alive
+           */
           if (neighbors < 2 || neighbors > 3) {
             gridCopy![i][k] = 0;
           } else if (state.userGridSize![i][k] === 0 && neighbors === 3) {

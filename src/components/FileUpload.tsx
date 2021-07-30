@@ -52,11 +52,13 @@ const readFile = (fileToRead: File, dispatch: Function, e: any) => {
       _tempE.target.value = null; // this is necessary to clean up the target value and clear the state to add and process new file
       dispatch({ type: Types.generateUserInputGrid, payload: { currentGeneration, rowsNumb, colsNumb, newPopulationState } });
     } else {
+      _tempE.target.value = null; // this is necessary to clean up the target value and clear the state to add and process new file
       alert("The uploaded file is empty");
     }
   };
 
   reader.onerror = (e) => {
+    _tempE.target.value = null; // this is necessary to clean up the target value and clear the state to add and process new file
     alert("Failed to read file!\n\n" + reader.error);
     reader.abort();
   };
@@ -89,6 +91,7 @@ const FileUpload = () => {
       if (fileType === 'txt') {
         readFile(files[0], dispatch, e);
       } else {
+        e.target.value = null; // this is necessary to clean up the target value and clear the state to add and process new file
         alert("The file type must be '.txt'");
       }
     }
